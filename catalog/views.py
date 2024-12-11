@@ -27,4 +27,4 @@ def product_detail(request, pk):
 def products_list(request):
     products = Product.objects.all()
     context = {"products": products}
-    return render(request, 'catalog/home.html', context)
+    return render(request, 'home.html', context)
