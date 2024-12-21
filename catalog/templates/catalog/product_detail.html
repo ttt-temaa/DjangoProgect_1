@@ -3,12 +3,12 @@
 {% block content %}
 <body>
 <h1>Информация о продукте</h1>
-<p>Название: {{ product_name }}</p>
-<p>Описание: {{ product_description }}</p>
-<p>Изображение: <img src="/media/photos/" {{ product_image }} alt="{{ product_name }}"></p>
-<p>Категория: {{ product_category }}</p>
-<p>Стоимость: {{ product_price }}</p>
-<p>Дата создания: {{ product_created_at }}</p>
-<p>Дата последнего изменения: {{ product_updated_at }}</p>
+<p>Название: {{ object.name }}</p>
+<p>Описание: {{ object.description }}</p>
+<p>Изображение: <img src="/media/{{ object.image }}" alt="{{ object.name }}"></p>
+<p>Категория: {{ object.category }}</p>
+<p>Стоимость: {{ object.price }}</p>
+<p>Дата создания: {{ object.created_at }}</p>
+<p>Дата последнего изменения: {{ object.updated_at }}</p>
 </body>
 {% endblock %}
