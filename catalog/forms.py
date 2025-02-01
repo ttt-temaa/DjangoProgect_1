@@ -8,16 +8,17 @@ class ProductForm(ModelForm):
         model = Product
         fields = '__all__'
 
-
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
 
         self.fields['name'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите название продукта'})
-        self.fields['description'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите описание продукта'})
-        self.fields['image'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Приложите фото вашего продукта'})
-        self.fields['category'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Выберите категорию продукта'})
+        self.fields['description'].widget.attrs.update(
+            {'class': 'form-control', 'placeholder': 'Введите описание продукта'})
+        self.fields['image'].widget.attrs.update(
+            {'class': 'form-control', 'placeholder': 'Приложите фото вашего продукта'})
+        self.fields['category'].widget.attrs.update(
+            {'class': 'form-control', 'placeholder': 'Выберите категорию продукта'})
         self.fields['price'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите цену продукта'})
-
 
     forbidden_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "бесплатно", "обман", "полиция", "радар"]
 
@@ -30,7 +31,6 @@ class ProductForm(ModelForm):
 
         return name
 
-
     def clean_description(self):
         description = self.cleaned_data.get('description', '')
 
@@ -40,11 +40,15 @@ class ProductForm(ModelForm):
 
         return description
 
-
     def clean_price(self):
         price = self.cleaned_data.get('price')
 
         if price < 0:
-            raise forms.ValidationError('Введите уорректную цену. Она не может быть отрицательной.')
+            raise forms.ValidationError('Введите корректную цену. Она не может быть отрицательной.')
 
         return price
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['publication_status']
